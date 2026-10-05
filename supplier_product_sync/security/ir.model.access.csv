@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_supplier_sync_log,supplier.sync.log,model_supplier_sync_log,stock.group_stock_manager,1,1,1,1
+access_supplier_sync_log_line,supplier.sync.log.line,model_supplier_sync_log_line,stock.group_stock_manager,1,1,1,1

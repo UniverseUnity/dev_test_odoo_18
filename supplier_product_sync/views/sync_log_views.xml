@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_supplier_sync_log_tree" model="ir.ui.view">
+        <field name="name">supplier.sync.log.tree</field>
+        <field name="model">supplier.sync.log</field>
+        <field name="arch" type="xml">
+            <list string="Sync Logs" default_order="start_time desc" create="false" edit="false">
+                <header>
+                    <button name="action_sync_now" string="Sync Now" type="object" class="oe_highlight"/>
+                </header>
+                <field name="name"/>
+                <field name="start_time"/>
+                <field name="duration" widget="float_time"/>
+                <field name="status" widget="badge" decoration-success="status == 'success'" decoration-warning="status == 'partial'" decoration-danger="status == 'failed'"/>
+                <field name="total_records"/>
+                <field name="records_created"/>
+                <field name="records_updated"/>
+                <field name="records_failed"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_supplier_sync_log_form" model="ir.ui.view">
+        <field name="name">supplier.sync.log.form</field>
+        <field name="model">supplier.sync.log</field>
+        <field name="arch" type="xml">
+            <form string="Sync Log" create="false" edit="false">
+                <header>
+                    <button name="action_sync_now" string="Sync Now" type="object" class="oe_highlight"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="start_time"/>
+                            <field name="end_time"/>
+                            <field name="duration" widget="float_time"/>
+                        </group>
+                        <group>
+                            <field name="total_records"/>
+                            <field name="records_created"/>
+                            <field name="records_updated"/>
+                            <field name="records_failed"/>
+                        </group>
+                    </group>
+                    <group string="Error Message" invisible="not error_message">
+                        <field name="error_message" nolabel="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Failed Records">
+                            <field name="line_ids">
+                                <list string="Failed Records">
+                                    <field name="sku"/>
+                                    <field name="error"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_supplier_sync_log" model="ir.actions.act_window">
+        <field name="name">Sync Logs</field>
+        <field name="res_model">supplier.sync.log</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_supplier_sync" name="Supplier Sync" parent="stock.menu_stock_config_settings" sequence="100"/>
+    <menuitem id="menu_supplier_sync_log" name="Sync Logs" parent="menu_supplier_sync" action="action_supplier_sync_log" groups="stock.group_stock_manager"/>
+</odoo>
