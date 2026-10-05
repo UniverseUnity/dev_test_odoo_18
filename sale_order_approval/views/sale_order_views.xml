@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+   
+    <record id="sale_order_view_form_approval" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.approval</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <field name="state" position="before">
+                <button
+                    string="Approve"
+                    name="action_approve"
+                    type="object"
+                    class="btn-primary"
+                    data-hotkey="shift+a"
+                    groups="sales_team.group_sale_manager"
+                    invisible="state != 'to_approve'"/>
+                <button
+                    string="Reject"
+                    name="action_reject"
+                    type="object"
+                    class="btn-secondary"
+                    data-hotkey="shift+r"
+                    groups="sales_team.group_sale_manager"
+                    invisible="state != 'to_approve'"/>
+            </field>
+
+            <field name="state" position="replace">
+                <field
+                    name="state"
+                    widget="statusbar"
+                    statusbar_visible="draft,sent,to_approve,sale"/>
+            </field>
+
+        </field>
+    </record>
+
+</odoo>

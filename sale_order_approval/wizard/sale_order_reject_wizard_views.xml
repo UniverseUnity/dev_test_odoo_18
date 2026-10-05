@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_order_reject_wizard_form" model="ir.ui.view">
+        <field name="name">sale.order.reject.wizard.form</field>
+        <field name="model">sale.order.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Reject Sale Order">
+                <sheet>
+                    <group>
+                        <field name="order_id" readonly="1"/>
+                        <field
+                            name="reason"
+                            placeholder="Please provide a reason for rejecting this order…"
+                            required="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button
+                        string="Reject Order"
+                        name="action_confirm_reject"
+                        type="object"
+                        class="btn-danger"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
